@@ -1,2 +1,7 @@
-FROM nginx:alpine
-COPY index.html /usr/share/nginx/html
+FROM node:18-alpine
+WORKDIR /app
+COPY package.json .
+COPY package*.json .
+RUN npm ci --omit=dev
+COPY . .
+CMD [ "node","server.js" ] 
